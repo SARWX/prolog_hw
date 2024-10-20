@@ -4,14 +4,14 @@ implement disease
 
 facts
     name : string.
-    symptoms : symptom.
-    general_state : general_state.
+    symptoms : symptom_t*.
+    recommendations : string.
 
 clauses
-    new(Name, Symptoms, GeneralState) :-
+    new(Name, Symptoms, Recommendations) :-
         name := Name,
         symptoms := Symptoms,
-        general_state := GeneralState.
+        recommendations := Recommendations.
 
     get_name() = name.
 
@@ -23,9 +23,13 @@ clauses
     set_symptoms(Symptoms) :-
         symptoms := Symptoms.
 
-    get_general_state() = general_state.
+    get_recommendations() = recommendations.
 
-    set_general_state(GeneralState) :-
-        general_state := GeneralState.
+    set_recommendations(Recommendations) :-
+        recommendations := Recommendations.
+
+    is_symptom(Symptom) :-
+        % Проверка наличия симптома в списке symptoms
+        Symptom in symptoms.
 
 end implement disease

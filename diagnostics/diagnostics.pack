@@ -2,7 +2,7 @@
 % privately used packages
 % implementations
 #include @"diagnostics\disease.pro"
-#include @"diagnostics\general_state.pro"
-#include @"diagnostics\symptom.pro"
-#include @"diagnostics\issue.pro"
-#include @"diagnostics\location.pro"
+% #include @"diagnostics\general_state.pro"
+% #include @"diagnostics\symptom.pro"
+% #include @"diagnostics\issue.pro"
+% #include @"diagnostics\location.pro"

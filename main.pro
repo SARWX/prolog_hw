@@ -1,7 +1,13 @@
 ﻿% Copyright
 
 implement main
-    open core
+    open core, disease
+
+domains
+    symptom_t = (string Что, string Где, string Как, string Когда).
+
+class facts - relatives
+    symptom : (string Что, string Где, string Как, string Когда).
 
 clauses
     run() :-
@@ -13,10 +19,23 @@ clauses
             stdio::errorStream:write(ErrorMessage),
             programControl::setApplicationExitCode(2)
         else
-            P = location::new("head", "left ear"),
-            Part = P:get_part(),
-            Specification = P:get_specification(),
-            stdio::write(Part, Specification),
+%            P = location::new("head", "left ear"),
+%            Part = P:get_part(),
+%            Specification = P:get_specification(),
+%            stdio::write(Part, Specification),
+            file::consult("dbfile.txt", relatives), % загрузка  базы фактов
+            % Создание объекта disease
+            Symptoms =
+                [
+                    ("боль" and "ухо" and "" and ""),
+                    symptom_t("ухудшение слуха", "", "сильно", ""),
+                    symptom_t("скованность", "челюсть", "сильно", "утром")
+                ],
+            Disease =
+                disease::new("Артрит височно-нижнечелюстного сустава", Symptoms,
+                    "Обратитесь к врачу для получения комплексного лечения, " ++ "включающего противовоспалительные препараты, физиотерапию и "
+                        ++ "ограничение нагрузки на челюсть."),
+            stdio::write(Disease:get_name()),
             stdio::write("Hello world!"),
             _ = stdio::readChar()
         end if.
