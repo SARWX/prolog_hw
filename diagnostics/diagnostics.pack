@@ -1,3 +1,4 @@
 ﻿#include @"diagnostics\diagnostics.ph"
 % privately used packages
 % implementations
+#include @"diagnostics\location.pro"
