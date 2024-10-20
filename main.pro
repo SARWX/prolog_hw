@@ -13,7 +13,8 @@ clauses
             stdio::errorStream:write(ErrorMessage),
             programControl::setApplicationExitCode(2)
         else
-            % place your own code here
+            stdio::write("Hello world!"),
+            _ = stdio::readChar()
         end if.
 
 end implement main
