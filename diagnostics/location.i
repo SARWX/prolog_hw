@@ -3,7 +3,9 @@
 interface location
 
 predicates
-    getName : () -> string Name.
-    setName : (string Name).
+    get_part : () -> string Part.
+    set_part : (string Part).
+    get_specification : () -> string Specification.
+    set_specification : (string Specification).
 
 end interface location

@@ -3,6 +3,6 @@
 class location : location
 
 constructors
-    new : (string Name).
+    new : (string Part, string Specification).
 
 end class location

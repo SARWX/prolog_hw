@@ -13,9 +13,10 @@ clauses
             stdio::errorStream:write(ErrorMessage),
             programControl::setApplicationExitCode(2)
         else
-            P = location::new("John"),
-            Name = P:getName(),
-            stdio::write(Name),
+            P = location::new("head", "left ear"),
+            Part = P:get_part(),
+            Specification = P:get_specification(),
+            stdio::write(Part, Specification),
             stdio::write("Hello world!"),
             _ = stdio::readChar()
         end if.

@@ -3,17 +3,26 @@
 implement location
 
 facts
-    name : string.
+    part : string.
+    specification : string.
 
 clauses
-    new(Name) :-
-        name := Name.
+    new(Part, Specification) :-
+        part := Part,
+        specification := Specification.
 
 clauses
-    getName() = name.
+    get_part() = part.
 
 clauses
-    setName(Name) :-
-        name := Name.
+    set_part(Part) :-
+        part := Part.
+
+clauses
+    get_specification() = specification.
+
+clauses
+    set_specification(Specification) :-
+        specification := Specification.
 
 end implement location
