@@ -15,6 +15,16 @@ clauses
         else
             P = location::new("head", "left ear"),
             Part = P:get_part(),
+            if P:include_symptom("боль", "голова", "сильно", "утром") then
+                stdio::write("\nИван является отцом Петра")
+            else
+                stdio::write("\nИван не является отцом Петра")
+            end if,
+            if P:include_symptom("покраснение", "нога", "слабо", "вечером") then
+                stdio::write("\nИван является отцом Петра")
+            else
+                stdio::write("\nИван не является отцом Петра")
+            end if,
             Specification = P:get_specification(),
             stdio::write(Part, Specification),
             stdio::write("Hello world!"),

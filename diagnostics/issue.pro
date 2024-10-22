@@ -5,6 +5,7 @@ implement issue
 facts
     general_issue : string.
     specific_issue : string.
+    symptom : (string A, string B, string C, string D).
 
 clauses
     new(GeneralIssue, SpecificIssue) :-

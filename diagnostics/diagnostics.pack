@@ -1,5 +1,6 @@
 ﻿#include @"diagnostics\diagnostics.ph"
 % privately used packages
+#include @"pfc\fileSystem\fileSystem.ph"
 % implementations
 #include @"diagnostics\disease.pro"
 #include @"diagnostics\general_state.pro"
