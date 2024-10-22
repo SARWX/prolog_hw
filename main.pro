@@ -3,6 +3,12 @@
 implement main
     open core
 
+domains
+    symptom_t = s(string What, string Where, string How, string Condition).
+
+constants
+%   symptom_1 : symptom_t = s("боль", "голова", "сильно", "утром").
+
 clauses
     run() :-
         CP = commandLineParser::new(),
@@ -13,21 +19,18 @@ clauses
             stdio::errorStream:write(ErrorMessage),
             programControl::setApplicationExitCode(2)
         else
-            P = location::new("head", "left ear"),
-            Part = P:get_part(),
-            if P:include_symptom("боль", "голова", "сильно", "утром") then
-                stdio::write("\nИван является отцом Петра")
+            Artrit = disease::new("artrit", "be healthier"),
+            %           Symptom_1 := s("боль", "голова", "сильно", "утром"),
+            if Artrit:include_symptom(disease::s("боль", "голова", "сильно", "утром")) then
+                stdio::write("\nУ вас Артрит")
             else
-                stdio::write("\nИван не является отцом Петра")
+                stdio::write("\nМы не диагностировали у вас болезней")
             end if,
-            if P:include_symptom("покраснение", "нога", "слабо", "вечером") then
-                stdio::write("\nИван является отцом Петра")
+            if Artrit:include_symptom(disease::s("покраснение", "нога", "слабо", "вечером")) then
+                stdio::write("\nУ вас Артрит")
             else
-                stdio::write("\nИван не является отцом Петра")
+                stdio::write("\nМы не диагностировали у вас болезней")
             end if,
-            Specification = P:get_specification(),
-            stdio::write(Part, Specification),
-            stdio::write("Hello world!"),
             _ = stdio::readChar()
         end if.
 

@@ -4,28 +4,37 @@ implement disease
 
 facts
     name : string.
-    symptoms : symptom.
-    general_state : general_state.
+    advice : string.
+%    general_state : general_state.
+
+class facts - diseae_db
+%    symptom : (string What, string Where, string How, string Condition).
+    symptom : (symptom_t).
 
 clauses
-    new(Name, Symptoms, GeneralState) :-
+    new(Name, Advice) :-
         name := Name,
-        symptoms := Symptoms,
-        general_state := GeneralState.
+        advice := Advice,
+%        general_state := GeneralState,
+        file::consult("artrit.txt", diseae_db).
 
     get_name() = name.
 
     set_name(Name) :-
         name := Name.
 
-    get_symptoms() = symptoms.
+    get_advice() = advice.
 
-    set_symptoms(Symptoms) :-
-        symptoms := Symptoms.
+    set_advice(Advice) :-
+        advice := Advice.
 
-    get_general_state() = general_state.
-
-    set_general_state(GeneralState) :-
-        general_state := GeneralState.
+clauses
+%    include_symptom(What, Where, How, Condition) :-
+    include_symptom(Symptom) :-
+%    symptom(What, Where, How, Condition).
+        symptom(Symptom).
 
 end implement disease
+%    get_general_state() = general_state.
+%    set_general_state(GeneralState) :-
+%       general_state := GeneralState.

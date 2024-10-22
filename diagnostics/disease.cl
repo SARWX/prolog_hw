@@ -3,6 +3,6 @@
 class disease : disease
 
 constructors
-    new : (string Name, symptom Symptoms, general_state GeneralState).
+    new : (string Name, string Advice).
 
 end class disease

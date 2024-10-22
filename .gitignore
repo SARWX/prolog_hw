@@ -1,4 +1,5 @@
 lab_2.prjgrd
 obj/
 deb/
-exe/
+/exe/
+!/exe/*.txt
