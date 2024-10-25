@@ -30,10 +30,18 @@ clauses
 
 clauses
 %    include_symptom(What, Where, How, Condition) :-
-    include_symptom(Symptom) :-
-%    symptom(What, Where, How, Condition).
-        symptom(Symptom).
 
+clauses
+    include_symptom(s(What, Where, How, When)) :-
+        symptom(s(FactWhat, FactWhere, FactHow, FactWhen)),
+        % Проверяем, что первая позиция совпадает
+        What = FactWhat,
+        % Остальные позиции могут совпадать или быть "_"
+        (Where = FactWhere or FactWhere = "_" or Where = "_" and FactWhere = _),
+        (How = FactHow or FactHow = "_" or How = "_" and FactHow = _),
+        (When = FactWhen or FactWhen = "_" or When = "_" and FactWhen = _).
+
+%    symptom(What, Where, How, Condition).
 end implement disease
 %    get_general_state() = general_state.
 %    set_general_state(GeneralState) :-

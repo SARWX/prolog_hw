@@ -16,3 +16,4 @@ predicates
 %    get_general_state : () -> general_state GeneralState.
 %   set_general_state : (general_state GeneralState).
 end interface disease
+%(s(i,i,i,i)) (s(i,i,i,o)) (s(i,i,o,i)) (s(i,i,o,o)) (s(i,o,i,i)) (s(i,o,i,o)) (s(i,o,o,i)) (s(i,o,o,o))
