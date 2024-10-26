@@ -12,6 +12,8 @@ predicates
     set_advice : (string Advice).
     %   include_symptom : (string A, string B, string C, string D) nondeterm.
     include_symptom : (symptom_t) nondeterm.
+    count_symptoms : (symptom_t*, integer) -> integer MatchedCount.
+    %   count_symptomss : (symptom_t*).
 
 %    get_general_state : () -> general_state GeneralState.
 %   set_general_state : (general_state GeneralState).

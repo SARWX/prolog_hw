@@ -43,21 +43,9 @@ clauses
             % Теперь подвергнем их диагностике
             Artrit = disease::new("artrit", "be healthier"),
             %           Symptom_1 := s("боль", "голова", "сильно", "утром"),
-            if Artrit:include_symptom(disease::s("боль", "", "сильно", "утром")) then
-                stdio::write("\nУ вас Артрит")
-            else
-                stdio::write("\nМы не диагностировали у вас болезней")
-            end if,
-            if Artrit:include_symptom(disease::s("артрит", "asd", "слабо", "вечером")) then
-                stdio::write("\nУ вас Артрит")
-            else
-                stdio::write("\nМы не диагностировали у вас болезней")
-            end if,
-            if Artrit:include_symptom(disease::s("боль", "_", "_", "_")) then
-                stdio::write("\nУ вас Артрит")
-            else
-                stdio::write("\nМы не диагностировали у вас болезней")
-            end if,
+            % Запуск проверки и вывод результата
+            stdio::write(Artrit:count_symptoms(Patient_test, 0)),
+%            stdio::writef("Совпадений с симптомами артрита: %d\n", Count),
             _ = stdio::readChar()
         end if.
 
