@@ -6,10 +6,23 @@ implement main
 domains
     symptom_t = s(string What, string Where, string How, string Condition).
 
+class predicates
+    diagnose_disease : (disease, disease::symptom_t*).
+
 constants
 %   symptom_1 : symptom_t = s("боль", "голова", "сильно", "утром").
 
 clauses
+    % Предикат для диагностики заболевания
+    diagnose_disease(DiseaseObject, PatientSymptoms) :-
+        Diagnosis = DiseaseObject:count_symptoms(PatientSymptoms, 0),
+        if Diagnosis > 50 then
+            stdio::write("\nС вероятностью ", Diagnosis, "% у вас ", DiseaseObject:get_name(), "\n"),
+            stdio::write("\nРекомендации:\n", DiseaseObject:get_advice(), "\n")
+        else
+            stdio::write("\nМы не диагностировали у вас ", DiseaseObject:get_name(), "\n")
+        end if.
+
     run() :-
         CP = commandLineParser::new(),
         CP:acceptEmpty := true,
@@ -41,10 +54,11 @@ clauses
                     disease::s("напряжение", "шея", "лёгкое", "в конце дня")
                 ],
             % Теперь подвергнем их диагностике
-            Artrit = disease::new("artrit", "be healthier"),
-            %           Symptom_1 := s("боль", "голова", "сильно", "утром"),
-            % Запуск проверки и вывод результата
-            stdio::write(Artrit:count_symptoms(Patient_test, 0)),
+            Artrit = disease::new("Артрит", "artrit_symptoms.txt", "artrit_advice.txt"),
+            diagnose_disease(Artrit, Patient_test),
+            % Теперь проверим является ли артрит гнойным
+            Gnoy_Artrit = disease::new("Гнойный Артрит", "gnoy-artrit_symptoms.txt", "gnoy-artrit_advice.txt"),
+            diagnose_disease(Gnoy_Artrit, Patient_test),
 %            stdio::writef("Совпадений с симптомами артрита: %d\n", Count),
             _ = stdio::readChar()
         end if.
