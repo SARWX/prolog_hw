@@ -3,24 +3,23 @@
 implement main
     open core
 
-domains
-    symptom_t = s(string What, string Where, string How, string Condition).
-
 class predicates
-    diagnose_disease : (disease, disease::symptom_t*).
+    diagnose_disease : (disease, disease::symptom_t*) determ.
 
 constants
-%   symptom_1 : symptom_t = s("боль", "голова", "сильно", "утром").
+    threshold = 50.
 
 clauses
     % Предикат для диагностики заболевания
     diagnose_disease(DiseaseObject, PatientSymptoms) :-
         Diagnosis = DiseaseObject:count_symptoms(PatientSymptoms, 0),
-        if Diagnosis > 50 then
+        if Diagnosis > threshold then
             stdio::write("\nС вероятностью ", Diagnosis, "% у вас ", DiseaseObject:get_name(), "\n"),
-            stdio::write("\nРекомендации:\n", DiseaseObject:get_advice(), "\n")
+            stdio::write("\nРекомендации:\n", DiseaseObject:get_advice(), "\n"),
+            succeed
         else
-            stdio::write("\nМы не диагностировали у вас ", DiseaseObject:get_name(), "\n")
+            stdio::write("\nМы не диагностировали у вас ", DiseaseObject:get_name(), "\n"),
+            fail
         end if.
 
     run() :-
@@ -55,11 +54,20 @@ clauses
                 ],
             % Теперь подвергнем их диагностике
             Artrit = disease::new("Артрит", "artrit_symptoms.txt", "artrit_advice.txt"),
-            diagnose_disease(Artrit, Patient_test),
-            % Теперь проверим является ли артрит гнойным
-            Gnoy_Artrit = disease::new("Гнойный Артрит", "gnoy-artrit_symptoms.txt", "gnoy-artrit_advice.txt"),
-            diagnose_disease(Gnoy_Artrit, Patient_test),
-%            stdio::writef("Совпадений с симптомами артрита: %d\n", Count),
+            if diagnose_disease(Artrit, Patient_test) then
+                % Теперь проверим является ли артрит гнойным
+                Gnoy_Artrit = disease::new("Гнойный Артрит", "gnoy-artrit_symptoms.txt", "gnoy-artrit_advice.txt"),
+                if diagnose_disease(Gnoy_Artrit, Patient_test) then
+                end if
+            else
+            end if,
+            % Не по заданию
+            Osteoartrit = disease::new("Остеоартрит", "osteoartrit_symptoms.txt", "osteoartrit_advice.txt"),
+            if diagnose_disease(Osteoartrit, Patient_test) then
+            end if,
+            Podagra = disease::new("Подагра", "podagra_symptoms.txt", "podagra_advice.txt"),
+            if diagnose_disease(Podagra, Patient_test) then
+            end if,
             _ = stdio::readChar()
         end if.
 
